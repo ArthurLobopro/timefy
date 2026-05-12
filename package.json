@@ -1,0 +1,40 @@
+{
+  "name": "@arthur-lobo/timefy",
+  "version": "1.0.0",
+  "description": "Easy handle time units.",
+  "keywords": [
+    "time",
+    "timefy"
+  ],
+  "license": "MIT",
+  "author": "Arthur Lobo",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest --run",
+    "build": "tsup",
+    "prepack": "build",
+    "lint": "biome check",
+    "lint:fix": "biome check --write"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.13",
+    "@types/node": "^25.6.0",
+    "lefthook": "^2.1.6",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
+  }
+}
