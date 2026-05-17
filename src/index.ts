@@ -1,4 +1,4 @@
-export * from "./Interval";
-export * from "./Time";
-export * from "./Timeout";
+export * from "./classes/Interval";
+export * from "./classes/Time";
+export * from "./classes/Timeout";
 export * from "./util";

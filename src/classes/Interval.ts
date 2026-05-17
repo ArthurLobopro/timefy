@@ -1,4 +1,4 @@
-import { isTimeLike, type TimeLike } from "./util";
+import { isTimeLike, type TimeLike } from "../util";
 
 export class Interval {
   private milliseconds: number;

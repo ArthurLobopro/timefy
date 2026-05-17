@@ -6,7 +6,7 @@ import {
   ONE_WEEK_IN_MILLISECONDS,
   TIMES,
   type UnitTime,
-} from "./constants";
+} from "../constants";
 
 export class Time {
   private ms: number;
