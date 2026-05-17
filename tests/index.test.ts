@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { delay, Interval, Timeout, t } from "../src";
+import {
+  AlreadyRunningError,
+  delay,
+  Interval,
+  NotRunningError,
+  Timeout,
+  t,
+} from "../src";
+
+const doNothing = () => {};
 
 describe("Time class tests", () => {
   it("Should return the correct time in milliseconds", () => {
@@ -45,6 +54,20 @@ describe("Interval class tests", () => {
     expect(count).toBeGreaterThanOrEqual(3);
     expect(count).toBeLessThanOrEqual(4);
   });
+
+  it("Should throw errors", () => {
+    const interval = new Interval(100, doNothing, true);
+
+    expect(() => {
+      interval.start();
+    }).throw(AlreadyRunningError);
+
+    interval.stop();
+
+    expect(() => {
+      interval.stop();
+    }).toThrow(NotRunningError);
+  });
 });
 
 describe("Timeout class tests", () => {
@@ -83,5 +106,21 @@ describe("Timeout class tests", () => {
     await delay(t(30, "ms"));
 
     expect(value).toBe(false);
+  });
+
+  it("Should throw errors", () => {
+    const timeout = new Timeout(100, doNothing);
+
+    timeout.start();
+
+    expect(() => {
+      timeout.start();
+    }).throw(AlreadyRunningError);
+
+    timeout.stop();
+
+    expect(() => {
+      timeout.stop();
+    }).toThrow(NotRunningError);
   });
 });

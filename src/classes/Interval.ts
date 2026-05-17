@@ -1,4 +1,5 @@
 import { isTimeLike, type TimeLike } from "../util";
+import { AlreadyRunningError, NotRunningError } from "./errors";
 
 export class Interval {
   private milliseconds: number;
@@ -24,7 +25,7 @@ export class Interval {
 
   start() {
     if (this.isRunning) {
-      throw new Error("Interval is already running.");
+      throw new AlreadyRunningError("Interval is already running.");
     }
 
     this.intervalId = setInterval(() => this.cb(), this.milliseconds);
@@ -32,7 +33,7 @@ export class Interval {
 
   stop() {
     if (!this.isRunning) {
-      throw new Error("Interval is not running.");
+      throw new NotRunningError("Interval is not running.");
     }
 
     // biome-ignore lint/style/noNonNullAssertion: If the interval is running, the intervalId will never be null.
