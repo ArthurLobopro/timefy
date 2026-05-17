@@ -32,12 +32,12 @@ describe("Time class tests", () => {
 describe("Interval class tests", () => {
   it("Should start and stop the interval correctly", async () => {
     let count = 0;
-    const interval = new Interval(100, () => {
+    const interval = new Interval(t(100, "ms"), () => {
       count++;
     });
 
     interval.start();
-    await delay(350);
+    await delay(t(350, "ms"));
     expect(interval.isRunning).toBe(true);
     interval.stop();
     expect(interval.isRunning).toBe(false);
