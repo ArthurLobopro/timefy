@@ -10,7 +10,7 @@ describe("Timefy tests", () => {
     expect(time.toHours()).toBe(7 * 24);
     expect(time.toMinutes()).toBe(7 * 24 * 60);
     expect(time.toSeconds()).toBe(7 * 24 * 60 * 60);
-    expect(time.toMiliseconds()).toBe(7 * 24 * 60 * 60 * 1000);
+    expect(time.toMilliseconds()).toBe(7 * 24 * 60 * 60 * 1000);
   });
 
   it("Should correctly sum time", () => {

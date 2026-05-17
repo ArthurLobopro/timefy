@@ -29,7 +29,7 @@ export class Time {
     return new Time(this.ms, "ms");
   }
 
-  toMiliseconds() {
+  toMilliseconds() {
     return this.ms;
   }
 
