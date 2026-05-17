@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { delay, Interval, t, Timeout } from "../src";
+import { delay, Interval, Timeout, t } from "../src";
 
 describe("Time class tests", () => {
   it("Should return the correct time in milliseconds", () => {

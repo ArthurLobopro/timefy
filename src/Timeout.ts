@@ -1,5 +1,4 @@
-import { isNumber } from "./guards";
-import type { TimeLike } from "./util";
+import { isTimeLike, type TimeLike } from "./util";
 
 export class Timeout {
   private milliseconds: number;
@@ -14,7 +13,9 @@ export class Timeout {
     public cb: () => void | Promise<void>,
     autoStart = false,
   ) {
-    this.milliseconds = isNumber(timeout) ? timeout : timeout.toMilliseconds();
+    this.milliseconds = isTimeLike(timeout)
+      ? timeout.toMilliseconds()
+      : timeout;
 
     if (autoStart) {
       this.start();
