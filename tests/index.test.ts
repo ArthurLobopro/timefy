@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { delay, Interval, t } from "../src";
+import { delay, Interval, t, Timeout } from "../src";
 
 describe("Time class tests", () => {
   it("Should return the correct time in milliseconds", () => {
@@ -44,5 +44,44 @@ describe("Interval class tests", () => {
 
     expect(count).toBeGreaterThanOrEqual(3);
     expect(count).toBeLessThanOrEqual(4);
+  });
+});
+
+describe("Timeout class tests", () => {
+  it("Should exec timeout correctly", async () => {
+    let value = false;
+    const timeout = new Timeout(
+      t(100, "ms"),
+      () => {
+        value = true;
+      },
+      true,
+    );
+
+    await delay(t(120, "ms"));
+
+    expect(timeout.isRunning).toBe(false);
+    expect(value).toBe(true);
+  });
+
+  it("Should stop timeout", async () => {
+    let value = false;
+    const timeout = new Timeout(
+      t(100, "ms"),
+      () => {
+        value = true;
+      },
+      true,
+    );
+
+    await delay(t(80, "ms"));
+
+    expect(timeout.isRunning).toBe(true);
+    timeout.stop();
+    expect(timeout.isRunning).toBe(false);
+
+    await delay(t(30, "ms"));
+
+    expect(value).toBe(false);
   });
 });
