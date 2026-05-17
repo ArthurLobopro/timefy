@@ -1,4 +1,4 @@
-import { isTimeLike, type TimeLike } from "../util";
+import { asMilliseconds, type TimeLike } from "../util";
 import { AlreadyRunningError, NotRunningError } from "./errors";
 
 export class Timeout {
@@ -14,9 +14,7 @@ export class Timeout {
     public cb: () => void | Promise<void>,
     autoStart = false,
   ) {
-    this.milliseconds = isTimeLike(timeout)
-      ? timeout.toMilliseconds()
-      : timeout;
+    this.milliseconds = asMilliseconds(timeout);
 
     if (autoStart) {
       this.start();

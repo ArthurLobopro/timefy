@@ -3,6 +3,7 @@ import {
   AlreadyRunningError,
   delay,
   Interval,
+  isTimeLike,
   NotRunningError,
   Timeout,
   t,
@@ -122,5 +123,12 @@ describe("Timeout class tests", () => {
     expect(() => {
       timeout.stop();
     }).toThrow(NotRunningError);
+  });
+});
+
+describe("TimeLike typeguard tests", () => {
+  it("Should return if a value is a TimeLike or not", () => {
+    expect(isTimeLike(t(1, "seconds"))).toBe(true);
+    expect(isTimeLike(null)).toBe(false);
   });
 });

@@ -1,4 +1,4 @@
-import { isTimeLike, type TimeLike } from "../util";
+import { asMilliseconds, type TimeLike } from "../util";
 import { AlreadyRunningError, NotRunningError } from "./errors";
 
 export class Interval {
@@ -14,9 +14,7 @@ export class Interval {
     public cb: () => void | Promise<void>,
     autoStart = false,
   ) {
-    this.milliseconds = isTimeLike(interval)
-      ? interval.toMilliseconds()
-      : interval;
+    this.milliseconds = asMilliseconds(interval);
 
     if (autoStart) {
       this.start();

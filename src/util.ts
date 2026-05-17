@@ -3,8 +3,7 @@ export interface TimeLike {
 }
 
 export function delay(time: TimeLike | number): Promise<void> {
-  const milliseconds = isTimeLike(time) ? time.toMilliseconds() : time;
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  return new Promise((resolve) => setTimeout(resolve, asMilliseconds(time)));
 }
 
 export function isTimeLike(value: unknown): value is TimeLike {
@@ -13,4 +12,8 @@ export function isTimeLike(value: unknown): value is TimeLike {
   } catch {
     return false;
   }
+}
+
+export function asMilliseconds(value: TimeLike | number) {
+  return isTimeLike(value) ? value.toMilliseconds() : value;
 }
