@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { t } from "../src";
+import { delay, Interval, t } from "../src";
 
-describe("Timefy tests", () => {
+describe("Time class tests", () => {
   it("Should return the correct time in milliseconds", () => {
     const time = t(1, "w");
 
@@ -26,5 +26,23 @@ describe("Timefy tests", () => {
     const copy = time.copy();
     time.add(30, "m");
     expect(copy.toHours()).toBe(1);
+  });
+});
+
+describe("Interval class tests", () => {
+  it("Should start and stop the interval correctly", async () => {
+    let count = 0;
+    const interval = new Interval(100, () => {
+      count++;
+    });
+
+    interval.start();
+    await delay(350);
+    expect(interval.isRunning).toBe(true);
+    interval.stop();
+    expect(interval.isRunning).toBe(false);
+
+    expect(count).toBeGreaterThanOrEqual(3);
+    expect(count).toBeLessThanOrEqual(4);
   });
 });
