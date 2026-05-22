@@ -9,6 +9,11 @@ export class Interval {
     return this.intervalId !== null;
   }
 
+  /**
+   * @param interval - The delay between executions. Numbers are treated as milliseconds.
+   * @param cb - The callback function to execute.
+   * @param autoStart - Whether to start the interval automatically (default: false).
+   */
   constructor(
     interval: number | TimeLike,
     public cb: () => void | Promise<void>,
@@ -21,6 +26,9 @@ export class Interval {
     }
   }
 
+  /**
+   * @throws {AlreadyRunningError} If the interval is already running.
+   */
   start() {
     if (this.isRunning) {
       throw new AlreadyRunningError("Interval is already running.");
@@ -29,6 +37,9 @@ export class Interval {
     this.intervalId = setInterval(() => this.cb(), this.milliseconds);
   }
 
+  /**
+   * @throws {NotRunningError} If the interval is not running.
+   */
   stop() {
     if (!this.isRunning) {
       throw new NotRunningError("Interval is not running.");
