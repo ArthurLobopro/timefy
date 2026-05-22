@@ -1,10 +1,17 @@
 {
   "name": "@arthur-lobo/timefy",
   "version": "1.1.0",
-  "description": "Easy handle time units.",
+  "description": "A simple and intuitive library for time manipulation, timeouts, and intervals",
   "keywords": [
     "time",
-    "timefy"
+    "timefy",
+    "timeout",
+    "interval",
+    "time manipulation",
+    "milliseconds",
+    "seconds",
+    "minutes",
+    "hours"
   ],
   "license": "MIT",
   "author": "Arthur Lobo",
