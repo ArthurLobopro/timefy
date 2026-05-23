@@ -8,18 +8,31 @@ import {
   type UnitTime,
 } from "../constants";
 
+/**
+ * Represents a duration of time and provides methods to manipulate and convert it.
+ */
 export class Time {
   private ms: number;
 
+  /**
+   * @param time - The amount of time.
+   * @param unit - The unit of time (e.g., 'ms', 's', 'm', 'h', 'd', 'w').
+   */
   constructor(time: number, unit: UnitTime) {
     this.ms = TIMES[unit] * time;
   }
 
+  /**
+   * @returns The updated Time instance for chaining.
+   */
   add(time: number, unit: UnitTime) {
     this.ms += TIMES[unit] * time;
     return this;
   }
 
+  /**
+   * @returns The updated Time instance for chaining.
+   */
   remove(time: number, unit: UnitTime) {
     this.ms -= TIMES[unit] * time;
     return this;
