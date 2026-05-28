@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
-  AlreadyRunningError,
-  delay,
-  Interval,
-  isTimeLike,
-  NotRunningError,
-  Timeout,
-  t,
+    AlreadyRunningError,
+    delay,
+    Interval,
+    isTimeLike,
+    NotRunningError,
+    t,
+    Timeout,
 } from "../src";
 
 const doNothing = () => {};
@@ -101,7 +101,7 @@ describe("Timeout class tests", () => {
     await delay(t(80, "ms"));
 
     expect(timeout.isRunning).toBe(true);
-    timeout.stop();
+    timeout.cancel();
     expect(timeout.isRunning).toBe(false);
 
     await delay(t(30, "ms"));
@@ -118,10 +118,10 @@ describe("Timeout class tests", () => {
       timeout.start();
     }).throw(AlreadyRunningError);
 
-    timeout.stop();
+    timeout.cancel();
 
     expect(() => {
-      timeout.stop();
+      timeout.cancel();
     }).toThrow(NotRunningError);
   });
 });

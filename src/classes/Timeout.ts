@@ -43,7 +43,7 @@ export class Timeout {
   /**
    * @throws {NotRunningError} If the timeout is not running.
    */
-  stop() {
+  cancel() {
     if (!this.isRunning) {
       throw new NotRunningError("Timeout is not running.");
     }
