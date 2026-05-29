@@ -17,7 +17,7 @@ interface IntervalOptions {
 
 export class Interval {
   private milliseconds: number;
-  private intervalId: NodeJS.Timeout | null = null;
+  private intervalId: ReturnType<typeof setInterval> | null = null;
   private options: IntervalOptions
 
   get isRunning(): boolean {
