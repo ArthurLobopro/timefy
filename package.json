@@ -1,6 +1,6 @@
 {
   "name": "@arthur-lobo/timefy",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "A simple and intuitive library for time manipulation, timeouts, and intervals",
   "keywords": [
     "time",
