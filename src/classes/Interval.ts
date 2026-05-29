@@ -1,40 +1,44 @@
 import { asMilliseconds, type TimeLike } from "../util";
-import { AlreadyRunningError, InvalidOptionsError, NotRunningError } from "./errors";
+import {
+  AlreadyRunningError,
+  InvalidOptionsError,
+  NotRunningError,
+} from "./errors";
 
 interface IntervalOptions {
   /**
    * Controls if the Interval should auto start
    */
-  autoStart?: boolean
+  autoStart?: boolean;
   /**
    * Controls if the Interval must have a limit.
    * Should be a integer or false. By default it's `false`.
    * Decimal values will be converted to a lower integer and `0` will be converted to `false`
    * @throws {InvalidOptionsError} when receive negative numbers
    */
-  limit?: number | false
+  limit?: number | false;
 }
 
 export class Interval {
   private milliseconds: number;
   private intervalId: ReturnType<typeof setInterval> | null = null;
-  private options: IntervalOptions
+  private options: IntervalOptions;
 
   get isRunning(): boolean {
     return this.intervalId !== null;
   }
 
-  private _count = 0
-  
-  get count(){
-    return this._count
+  private _count = 0;
+
+  get count() {
+    return this._count;
   }
 
-  private set count(v: number){
-    this._count = v
+  private set count(v: number) {
+    this._count = v;
 
-    if(this.options.limit && this.count >= this.options.limit){
-      this.stop()
+    if (this.options.limit && this.count >= this.options.limit) {
+      this.stop();
     }
   }
 
@@ -46,16 +50,16 @@ export class Interval {
   constructor(
     interval: number | TimeLike,
     public cb: () => void | Promise<void>,
-    {autoStart = false, limit = false}: IntervalOptions = {}
+    { autoStart = false, limit = false }: IntervalOptions = {},
   ) {
     this.milliseconds = asMilliseconds(interval);
 
-    if(isNumber(limit)) validateLimit(limit)
+    if (isNumber(limit)) validateLimit(limit);
 
     this.options = {
       autoStart,
-      limit: limit ? Math.ceil(limit) : false
-    }  
+      limit: limit ? Math.ceil(limit) : false,
+    };
 
     if (this.options.autoStart) {
       this.start();
@@ -71,8 +75,8 @@ export class Interval {
     }
 
     this.intervalId = setInterval(() => {
-      this.cb()
-      this.count++
+      this.cb();
+      this.count++;
     }, this.milliseconds);
   }
 
@@ -91,12 +95,11 @@ export class Interval {
 }
 
 function validateLimit(limit: number) {
-  if(limit < 0){
-    throw new InvalidOptionsError("Interval limit must be greater than 0.")
-    
+  if (limit < 0) {
+    throw new InvalidOptionsError("Interval limit must be greater than 0.");
   }
 }
 
-function isNumber(v: unknown) : v is number{
-  return typeof v === "number"
+function isNumber(v: unknown): v is number {
+  return typeof v === "number";
 }

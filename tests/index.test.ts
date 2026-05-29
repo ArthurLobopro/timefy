@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
-    AlreadyRunningError,
-    delay,
-    Interval,
-    InvalidOptionsError,
-    isTimeLike,
-    NotRunningError,
-    t,
-    Timeout,
+  AlreadyRunningError,
+  delay,
+  Interval,
+  InvalidOptionsError,
+  isTimeLike,
+  NotRunningError,
+  Timeout,
+  t,
 } from "../src";
 
 const doNothing = () => {};
