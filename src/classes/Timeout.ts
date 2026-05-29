@@ -3,7 +3,7 @@ import { AlreadyRunningError, NotRunningError } from "./errors";
 
 export class Timeout {
   private milliseconds: number;
-  private timeoutId: NodeJS.Timeout | null = null;
+  private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   get isRunning(): boolean {
     return this.timeoutId !== null;
@@ -43,7 +43,7 @@ export class Timeout {
   /**
    * @throws {NotRunningError} If the timeout is not running.
    */
-  stop() {
+  cancel() {
     if (!this.isRunning) {
       throw new NotRunningError("Timeout is not running.");
     }
