@@ -3,6 +3,7 @@ import {
     AlreadyRunningError,
     delay,
     Interval,
+    InvalidOptionsError,
     isTimeLike,
     NotRunningError,
     t,
@@ -54,10 +55,24 @@ describe("Interval class tests", () => {
 
     expect(count).toBeGreaterThanOrEqual(3);
     expect(count).toBeLessThanOrEqual(4);
+    expect(interval.count).toBe(count);
+  });
+
+  it("Should respect the limit", async () => {
+    const TIME = 150;
+    const interval = new Interval(TIME, doNothing, {
+      autoStart: true,
+      limit: 4,
+    });
+
+    await delay(TIME * 4 + TIME / 2);
+
+    expect(interval.isRunning).toBe(false);
+    expect(interval.count).toBe(4);
   });
 
   it("Should throw errors", () => {
-    const interval = new Interval(100, doNothing, true);
+    const interval = new Interval(100, doNothing, { autoStart: true });
 
     expect(() => {
       interval.start();
@@ -68,6 +83,10 @@ describe("Interval class tests", () => {
     expect(() => {
       interval.stop();
     }).toThrow(NotRunningError);
+
+    expect(() => new Interval(100, doNothing, { limit: -1 })).toThrow(
+      InvalidOptionsError,
+    );
   });
 });
 
