@@ -4,8 +4,6 @@
     "module": "es2015",
     "target": "esnext",
     "moduleResolution": "bundler",
-    "types": ["node"],
-
     "sourceMap": false,
     "declaration": true,
     "declarationMap": false,
@@ -34,5 +32,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "exclude": ["tests", "dist"]
+  "exclude": ["tests", "dist", "tsup.config.ts"]
 }
